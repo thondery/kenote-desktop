@@ -10,7 +10,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => ({
-  
+  mainWindowAuth      : state.Root.mainWindowAuth,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

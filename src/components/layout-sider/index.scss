@@ -1,0 +1,23 @@
+
+.layout-sider-main {
+  width: inherit;
+
+  .ant-menu-dark.ant-menu-inline .ant-menu-item-selected {
+    background-color: #408260;
+  }
+
+  .ant-menu-submenu-title, .ant-menu-item {
+
+    i {
+      margin-right: 10px;
+    }
+  }
+
+  .ant-menu-sub .ant-menu-item {
+
+    span {
+      margin-left: 15px;
+    }
+  }
+}
+

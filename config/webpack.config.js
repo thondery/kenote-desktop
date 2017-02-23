@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const project = require('./project.config')
 const debug = require('debug')('app:config:webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const __DEV__ = project.globals.__DEV__
 const __PROD__ = project.globals.__PROD__
@@ -24,7 +25,10 @@ const webpackConfig = {
     }
   },
   module : {
-    noParse: [/moment-with-locales/]
+    noParse: [
+      /moment-with-locales/,
+      /node_modules\/localforage\/dist\/localforage.js/
+    ]
   }
 }
 
@@ -72,7 +76,10 @@ webpackConfig.plugins = [
     minify   : {
       collapseWhitespace : false
     }
-  })
+  }),
+  new CopyWebpackPlugin([
+    { from: 'src/window.js', to: 'window.js' }
+  ])
 ]
 
 // Ensure that the compiler exits on errors during testing so that

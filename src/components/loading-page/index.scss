@@ -1,0 +1,15 @@
+
+.loading-page {
+  width: inherit;
+  height: inherit;
+  //background-color: #ccc;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .icon {
+    color: #333;
+  }
+}

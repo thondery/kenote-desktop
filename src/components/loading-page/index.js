@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react'
+import FontAwesome from '../font-awesome'
+import './index.scss'
+import Logo from '../../assets/images/kenote.svg'
 
-export default class Home extends Component {
+export default class LoadingPage extends Component {
   // 定义参数类型
   static propTypes = {
 
@@ -21,7 +24,7 @@ export default class Home extends Component {
 
   // 组件在载入之前调用
   componentWillMount () {
-
+    window.reload && window.reload('PAGE_INIT_ARGS')
   }
 
   // 组件在载入之后调用
@@ -36,7 +39,7 @@ export default class Home extends Component {
 
   // 组件判断是否重新渲染时调用
   shouldComponentUpdate (nextProps, nextState) {
-    return true
+    return false
   }
 
   // 移除组件时调用
@@ -46,17 +49,15 @@ export default class Home extends Component {
 
   // 渲染组件
   render () {
-    
     return (
-      <div className="app">
-        <h1>Hello World!!! This is Home Page.</h1>
-        <p>{JSON.stringify(this.props.mainWindowAuth)}</p>
-        <a onClick={() => this.onClickHandle()}>initial</a>
+      <div className="loading-page animated fadeIn">
+        <img src={Logo} />
+        <FontAwesome 
+          className={'icon'} 
+          type={'spinner'} 
+          animated={'spin'} 
+          larger={'4x'} />
       </div>
     )
-  }
-
-  onClickHandle () {
-    initial()
   }
 }

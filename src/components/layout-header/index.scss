@@ -1,0 +1,69 @@
+.layout-header {
+  background-color: #ececec;
+  //background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#f6f6f8), to(#c0c0c0));
+  border-bottom: 1px #dad7d7 solid;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 10px;
+  align-items: center;
+  height: 65px;
+  line-height: 2.4;
+  user-select: none;
+  cursor: default;
+  -webkit-app-region: drag;
+
+  .title {
+    font-weight: 500;
+    font-size: 14px;
+    font-family: Helvetica Neue,Luxi Sans,DejaVu Sans,Tahoma,Hiragino Sans GB,STHeiti,Microsoft YaHei;
+    height: 24px;
+    line-height: 24px;
+  }
+}
+
+.layout-header-nomac {
+  height: 40px;
+}
+
+.layout-header-main {
+  display: flex;
+  width: 100%;
+  height: 40px;
+  justify-content: space-between;
+
+  .ant-btn {
+    padding: 4px 10px;
+  }
+
+  .layout-header-left {
+
+  }
+
+  .layout-header-right {
+    align-items: center;
+    display: flex;
+
+    button {
+      margin-right: 8px;
+    }
+  }
+
+  .layout-header-auth {
+    line-height: 40px;
+    color: #999;
+
+    span {
+      margin: 0 8px;
+      font-size: 14px;
+    }
+  }
+
+  .layout-header-icon {
+    line-height: 40px;
+    color: #999;
+    margin-left: 10px;
+    margin-right: 8px;
+  }
+}
+

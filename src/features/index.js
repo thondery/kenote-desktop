@@ -9,5 +9,5 @@ export const Routes = [
 ]
 
 export const Reducers = {
-  HomeReducer,
+  Home: HomeReducer,
 }
