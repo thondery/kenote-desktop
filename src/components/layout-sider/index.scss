@@ -2,6 +2,10 @@
 .layout-sider-main {
   width: inherit;
 
+  .layout-sider-link-active {
+    background-color: #408260;
+  }
+
   .ant-menu-dark.ant-menu-inline .ant-menu-item-selected {
     background-color: #408260;
   }
@@ -14,6 +18,18 @@
   }
 
   .ant-menu-sub .ant-menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 5px;
+
+    >a:first-child:before {
+      width: 80%;
+    }
+
+    >a:last-child:before {
+      width: 0;
+    }
 
     span {
       margin-left: 15px;

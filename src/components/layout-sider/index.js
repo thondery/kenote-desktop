@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { Menu } from 'antd'
+import { IndexLink, Link } from 'react-router'
+import { Menu, Dropdown } from 'antd'
 import FontAwesome from '../font-awesome'
 import './index.scss'
 
@@ -8,12 +9,16 @@ const { SubMenu } = Menu
 export default class LayoutSider extends Component {
   // 定义参数类型
   static propTypes = {
-
+    location: PropTypes.object,
+    noteBookList: PropTypes.array,
+    openModal: PropTypes.func
   }
 
   // 设置参数默认值
   static defaultProps = {
-
+    location: null,
+    noteBookList: [],
+    openModal: () => null
   }
 
   // 组件初始化
@@ -51,30 +56,78 @@ export default class LayoutSider extends Component {
 
   // 渲染组件
   render () {
+    let { location, noteBookList } = this.props
+
+    let menu = (
+      <Menu onClick={this.onMenuClick.bind(this)}>
+        <Menu.Item key="1">配置</Menu.Item>
+        <Menu.Item key="2">删除</Menu.Item>
+      </Menu>
+    )
     return (
       <div className="layout-sider-main">
         <Menu
           theme={'dark'}
           mode={'inline'}
-          inlineIndent={10}
-          >
-          <Menu.Item key={'1'}>
-            <FontAwesome type={'file-text'} /><span>笔记</span>
+          selectedKeys={[location.pathname]}
+          defaultOpenKeys={['/notebook']}
+          inlineIndent={10} >
+          <Menu.Item key={'/notes'}>
+            <Link to={`/notes`}>
+              <FontAwesome type={'file-text'} /><span>笔记</span>
+            </Link>
           </Menu.Item>
-          <SubMenu key={'sub-1'}
+          <Menu.Item key={'/notebook'}>
+            <Link to={`/notebook`}>
+              <FontAwesome type={'book'} /><span>笔记本</span>
+            </Link>
+          </Menu.Item>
+          {/*<SubMenu key={'/notebook'}
             title={<span><FontAwesome type={'book'} /><span>笔记本</span></span>} >
-            <Menu.Item key={'sub-1-1'}>
-              <span>笔记本1</span>
-            </Menu.Item>
-          </SubMenu>
-          <Menu.Item key={'3'}>
-            <FontAwesome type={'tags'} /><span>标签</span>
+            {noteBookList.map( (item, i) => {
+              return <Menu.Item key={`/notebook/${item.clientId || item._id}`} >
+                <Link to={`/notebook/${item.clientId || item._id}`}><span>{item.name}</span></Link>
+                
+                <Dropdown overlay={this.dropDownMenu(item)} trigger={['click']}>
+                  <a><FontAwesome type={'cog'} /></a>
+                </Dropdown>
+              </Menu.Item>
+            })}
+          </SubMenu>*/}
+          <Menu.Item key={'/tags'}>
+            <Link to={`/tags`}>
+              <FontAwesome type={'tags'} /><span>标签</span>
+            </Link>
           </Menu.Item>
-          <Menu.Item key={'4'}>
-            <FontAwesome type={'trash'} /><span>废纸篓</span>
+          <Menu.Item key={'/trash'}>
+            <Link to={`/trash`}>
+              <FontAwesome type={'trash'} /><span>废纸篓</span>
+            </Link>
           </Menu.Item>
         </Menu>
       </div>
     )
+  }
+
+  dropDownMenu (item) {
+    return (
+      <Menu onClick={this.onMenuClick.bind(this, item)}>
+        <Menu.Item key="1">配置</Menu.Item>
+        <Menu.Item key="2">删除</Menu.Item>
+      </Menu>
+    )
+  }
+
+  onMenuClick (item, e) {
+    switch (e.key) {
+      case '1':
+        this.props.openModal('cogNotebook', item)
+        break
+      case '2':
+        
+        break
+      default:
+        break
+    }
   }
 }

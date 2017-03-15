@@ -17,7 +17,7 @@ let mainWindow, bounds
 
 let mainArgs = {
   name         : 'init',
-  width        : 930,
+  width        : 1000,
   height       : 540,
   frame        : !__MACOS__,
   resizable    : false
@@ -51,7 +51,7 @@ let maximize = false
 function openIt () {
   mainWindow = new BrowserWindow(mainArgs)
   mainWindow.loadURL(mainPage)
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
   mainWindow.on('close', () => {
     mainWindow = null
   })

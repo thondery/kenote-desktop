@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { Layout, Icon, Menu, Dropdown, Tooltip, Input, Button } from 'antd'
 import classnames from 'classnames'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { actions } from '../../containers/reducer'
 import WinTools from '../win-tools'
 import FontAwesome from '../font-awesome'
 import './index.scss'
@@ -8,15 +11,15 @@ import './index.scss'
 const { Header } = Layout 
 const { Search } = Input
 
-export default class LayoutHeader extends Component {
+class LayoutHeader extends Component {
   // 定义参数类型
   static propTypes = {
-    auth: PropTypes.object
+    
   }
 
   // 设置参数默认值
   static defaultProps = {
-    auth: null
+    
   }
 
   // 组件初始化
@@ -54,9 +57,9 @@ export default class LayoutHeader extends Component {
 
   // 渲染组件
   render () {
-    let { auth } = this.props
+    let { auth, syncPending } = this.props
     let menu = (
-      <Menu>
+      <Menu onClick={this.onMenuClick.bind(this)}>
         <Menu.Item key="1">注销 {auth.username}</Menu.Item>
         <Menu.Divider />
         <Menu.Item key="2">账户信息...</Menu.Item>
@@ -65,7 +68,7 @@ export default class LayoutHeader extends Component {
     return (
       <Header 
         className={classnames('layout-header', window.__MACOS__ && __DESKTOP__ ? null : 'layout-header-nomac')} 
-        onDoubleClick={this.onDoubleClickHandle.bind(this)}>
+        onDoubleClick={this.onDoubleClickHandle.bind(this)} >
         {window.__MACOS__ && __DESKTOP__ ? <div className="title">主页 — 基诺笔记</div> : null}
         {window.__MACOS__ && __DESKTOP__ ? <WinTools showMode={'all'} /> : null}
         <div className="layout-header-main">
@@ -79,8 +82,15 @@ export default class LayoutHeader extends Component {
             </Dropdown>
             {__DESKTOP__ ? 
               <Tooltip title={'与服务器同步'}>
-                <a className={'layout-header-icon'}>
-                  <FontAwesome type="refresh" />
+                <a 
+                  className={'layout-header-icon'} 
+                  onClick={() => {
+                    if (syncPending) return
+                    this.props.actions.syncDataRequest()
+                  }}>
+                  <FontAwesome 
+                    type="refresh" 
+                    animated={syncPending ? 'spin' : undefined} />
                 </a>
               </Tooltip>
              : null}
@@ -94,18 +104,28 @@ export default class LayoutHeader extends Component {
             <Tooltip title={'新建笔记'}>
               <Button icon="plus">新笔记</Button>
             </Tooltip>
-            <Tooltip title={'新建笔记本'}>
-              <Button icon="plus">新笔记本</Button>
-            </Tooltip>
             <Search
+              className={'layout-header-searchbar'}
               placeholder="搜索笔记"
-              style={{ width: 400 }}
-              onSearch={value => console.log(value)}
-            />
+              style={{ width: 300 }}
+              onSearch={value => {console.log(value)}} />
           </div>
         </div>
       </Header>
     )
+  }
+
+  onMenuClick (e) {
+    switch (e.key) {
+      case '1':
+        this.props.actions.logoutMain()
+        break
+      case '2':
+        this.props.actions.openModal('authInfo')
+        break
+      default:
+        break
+    }
   }
 
   onDoubleClickHandle (e) {
@@ -113,3 +133,15 @@ export default class LayoutHeader extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators({ ...actions }, dispatch)
+  }
+}
+
+const mapStateToProps = (state) => ({
+  auth                : state.Root.mainWindowAuth,
+  syncPending         : state.Root.syncPending
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LayoutHeader)

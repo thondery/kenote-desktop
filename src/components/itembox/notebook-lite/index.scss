@@ -1,0 +1,62 @@
+
+
+.notebook-list-item-lite {
+  width: 250px;
+  height: 50px;
+  background: #f7f7f7;
+  border: 1px #d9d9d9 solid;
+  border-radius: 2px;
+  margin: 2px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+
+  &.notebook-list-item-lite-selected {
+    border: 1px solid #64be90;
+  }
+
+  span {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  .info {
+    border-left: 1px #eee solid;
+    width: 50px;
+    height: inherit;
+    padding-right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      font-size: 12px;
+      color: #999;
+    }
+  }
+
+  .tools {
+    width: 60px;
+    height: 50px;
+    position: absolute;
+    right: -60px;
+    transition: all .8s;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #f7f7f7;
+    padding-right: 10px;
+    opacity: 0;
+  }
+
+  &:hover {
+
+    .tools {
+      right: 0;
+      opacity: 1;
+    }
+    
+  }
+}

@@ -37,7 +37,7 @@
       "command": "nodemon bin/dev-server",
       "env": {
         "NODE_ENV": "development",
-        "PORT": 3028,
+        "PORT": 3030,
         "DEBUG": "app:*"
       }
     },
@@ -126,6 +126,7 @@
     "localforage": "^1.4.3",
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
+    "nedb": "^1.8.0",
     "query-string": "^4.2.3",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",

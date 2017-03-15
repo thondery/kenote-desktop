@@ -66,7 +66,9 @@ webpackConfig.externals['react/addons'] = true
 // ------------------------------------
 webpackConfig.plugins = [
   new webpack.DefinePlugin(project.globals),
-  new LodashModuleReplacementPlugin(),
+  new LodashModuleReplacementPlugin({
+    'shorthands': true
+  }),
   new HtmlWebpackPlugin({
     template : project.paths.client('index.html'),
     hash     : false,

@@ -59,10 +59,10 @@ export const createAction = (type, res) => {
   return opts
 }
 
-export const createPayload = (data) => {
+export const createPayload = (data, status = null) => {
   return {
     data,
-    status: {
+    status: status || {
       code: 0,
       message: 'Request Success!'
     }

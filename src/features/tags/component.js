@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import _ from 'lodash'
 
-export default class Home extends Component {
+export default class Tags extends Component {
   // 定义参数类型
   static propTypes = {
 
@@ -48,13 +47,9 @@ export default class Home extends Component {
   // 渲染组件
   render () {
     return (
-      <div className="app">
-        <h1>Hello World!!! This is Home Page.</h1>
+      <div>
+        Tags
       </div>
     )
-  }
-
-  onClickHandle () {
-    initial()
   }
 }

@@ -1,0 +1,55 @@
+
+.modal-form-notebook {
+
+  .ant-form-item {
+    margin-bottom: 0;
+    border-bottom: 1px #eee solid;
+    padding: 2px 5px;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    label {
+      font-size: 14px;
+      color: #64be90;
+    }
+
+    span {
+      font-size: 14px;
+      color: rgba(0,0,0,.25);
+    }
+
+    .has-feedback:after {
+      top: 4px;
+      z-index: 10;
+    }
+
+    .ant-form-explain {
+      padding-top: 8px;
+    }
+
+    .ant-input:not(:first-child) {
+      padding-left: 30px;
+    }
+
+    .ant-input-lg {
+      height: 40px;
+      font-size: 14px;
+    }
+  }
+
+  .ant-col-6 {
+    text-align: left;
+  }
+
+}
+
+.modal-form-error-tips {
+  color: #d06f5c;
+  font-size: larger;
+  line-height: 1.8;
+  display: flex;
+  padding: 0 10px;
+  height: 33px;
+}

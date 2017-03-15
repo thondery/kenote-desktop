@@ -1,0 +1,19 @@
+
+
+.notebook_layout {
+  min-width: 800px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.notebook_layout_content {
+  overflow: auto;
+  padding: 20px 0 0 0;
+
+  .notebook-list-lite {
+    padding: 0 5px;
+    display: flex;
+    flex-direction: row;
+  }
+}
+

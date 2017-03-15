@@ -7,6 +7,12 @@ import LoginPage from '../components/login-page'
 import 'font-awesome/css/font-awesome.css'
 import '../styles/core.scss'
 import CoreLayout from '../layouts/core'
+import Modal from '../components/modal'
+import { rootNoteBookList } from '../features/notebook/action'
+import * as storgeService from '../services/storage'
+import _ from 'lodash'
+import moment from 'moment'
+import localforage from 'localforage'
 
 class App extends Component {
   static propTypes = {
@@ -25,9 +31,10 @@ class App extends Component {
 
   // 当组件传入新参数时调用
   componentWillReceiveProps (nextProps) {
-    let { mainWindowAuth } = nextProps
+    let { mainWindowAuth, noteBookList, noteBookIniial, NoteBookList } = nextProps
     if (mainWindowAuth) {
       window.reload && window.reload('PAGE_MAIN_ARGS', mainWindowAuth)
+      noteBookIniial && this.props.actions.rootNoteBookList(NoteBookList)
     }
     else {
       window.reload && window.reload('PAGE_SIGN_ARGS')
@@ -41,12 +48,16 @@ class App extends Component {
       loginMainPending,
       loginMainError,
       loginMainMessage,
+      modelOpened,
+      modelOption,
+      noteBookList,
       children 
     } = this.props
     let mainView = mainWindowAuth 
       ? <CoreLayout
-          auth={mainWindowAuth}
-          logout={this.props.actions.logoutMain.bind(this)} >
+          noteBookList={noteBookList}
+          location={this.props.location}
+          openModal={this.props.actions.openModal.bind(this)} >
           {children}
         </CoreLayout>
       : <LoginPage 
@@ -57,6 +68,17 @@ class App extends Component {
     return (
       <div className="app">
         { initialMainWidow ? <LoadingPage /> : mainView }
+        <Modal.AuthInfo 
+          visible={modelOpened === 'authInfo'}
+          auth={mainWindowAuth}
+          closeModel={this.props.actions.openModal.bind(this)} />
+        <Modal.AddNotebook 
+          visible={modelOpened === 'addNotebook'}
+          closeModel={this.props.actions.openModal.bind(this)} />
+        <Modal.CogNotebook
+          visible={modelOpened === 'cogNotebook'}
+          options={modelOption}
+          closeModel={this.props.actions.openModal.bind(this)} />
       </div>
     )
   }
@@ -68,7 +90,7 @@ class App extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators({ ...actions }, dispatch)
+    actions: bindActionCreators({ ...actions, rootNoteBookList }, dispatch)
   }
 }
 
@@ -78,7 +100,15 @@ const mapStateToProps = (state) => ({
 
   loginMainPending    : state.Root.loginMainPending,
   loginMainError      : state.Root.loginMainError,
-  loginMainMessage    : state.Root.loginMainMessage
+  loginMainMessage    : state.Root.loginMainMessage,
+
+  modelOpened         : state.Root.modelOpened,
+  modelOption         : state.Root.modelOption,
+
+  noteBookList        : state.Notebook.noteBook,
+  noteBookIniial      : state.Notebook.listInitial,
+  NoteBookList        : state.Root.noteBookList,
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

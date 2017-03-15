@@ -8,7 +8,7 @@ if (typeof require === 'function') {
   const IPCMAIN = {
     [PAGE_INIT_ARGS]: {
       name              : 'init',
-      width             : 930,
+      width             : 1000,
       height            : 540,
       frame             : !window.__MACOS__,
       resizable         : false
@@ -24,7 +24,7 @@ if (typeof require === 'function') {
       name              : 'main',
       width             : 1280,
       height            : 640,
-      minWidth          : 930,
+      minWidth          : 1000,
       minHeight         : 540,
       frame             : !window.__MACOS__,
       resizable         : true

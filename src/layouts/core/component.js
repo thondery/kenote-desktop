@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Layout } from 'antd'
 import LayoutHeader from '../../components/layout-header'
 import LayoutSider from '../../components/layout-sider'
+import LayoutFooter from '../../components/layout-footer'
 import './style.scss'
 
 const { Header, Footer, Sider, Content } = Layout
@@ -10,14 +11,16 @@ const ipcRenderer = window.ipcRenderer
 export default class CoreLayout extends Component {
   // 定义参数类型
   static propTypes = {
-    logout: PropTypes.func,
-    auth: PropTypes.object
+    openModal: PropTypes.func,
+    location: PropTypes.object,
+    noteBookList: PropTypes.array,
   }
 
   // 设置参数默认值
   static defaultProps = {
-    logout: () => null,
-    auth: null
+    openModal: () => null,
+    location: null,
+    noteBookList: [],
   }
 
   // 组件初始化
@@ -63,14 +66,17 @@ export default class CoreLayout extends Component {
     
     return (
       <Layout className={'core-layout'}>
-        <LayoutHeader auth={this.props.auth} />
+        <LayoutHeader />
         <Layout>
           <Sider className="layout-sider">
-            <LayoutSider />
+            <LayoutSider
+              noteBookList={this.props.noteBookList}
+              location={this.props.location}
+              openModal={this.props.openModal.bind(this)} />
           </Sider>
-          <Content>{this.props.children}</Content>
+          {this.props.children}
         </Layout>
-        
+        {__DESKTOP__ ? <LayoutFooter /> : null}
       </Layout>
     )
   }
