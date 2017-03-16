@@ -13,6 +13,7 @@ export default class Notebook extends Component {
     selected: PropTypes.bool,
     onCogNotebook: PropTypes.func,
     onTrashNotebook: PropTypes.func,
+    onDoubleClick: PropTypes.func,
   }
 
   // 设置参数默认值
@@ -21,7 +22,8 @@ export default class Notebook extends Component {
     onClick: () => null,
     selected: false,
     onCogNotebook: () => null,
-    onTrashNotebook: () => null
+    onTrashNotebook: () => null,
+    onDoubleClick: () => null,
   }
 
   // 组件初始化
@@ -59,7 +61,7 @@ export default class Notebook extends Component {
 
   // 渲染组件
   render () {
-    let { data, onClick, selected, onCogNotebook, onTrashNotebook } = this.props
+    let { data, onClick, selected, onCogNotebook, onTrashNotebook, onDoubleClick } = this.props
     let classname = classnames(
       'notebook-list-item', 
       selected ? 'notebook-list-item-selected' : undefined,
@@ -68,7 +70,7 @@ export default class Notebook extends Component {
     return (
       <div className={classname} 
         onClick={onClick}
-        onDoubleClick={ () => console.log('双击') } >
+        onDoubleClick={onDoubleClick} >
         <div className={'notebook-list-item-name'}>
           <span>{data.name}</span>
         </div>

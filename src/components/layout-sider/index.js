@@ -11,14 +11,16 @@ export default class LayoutSider extends Component {
   static propTypes = {
     location: PropTypes.object,
     noteBookList: PropTypes.array,
-    openModal: PropTypes.func
+    openModal: PropTypes.func,
+    noteBookParams: PropTypes.string,
   }
 
   // 设置参数默认值
   static defaultProps = {
     location: null,
     noteBookList: [],
-    openModal: () => null
+    openModal: () => null,
+    noteBookParams: undefined,
   }
 
   // 组件初始化
@@ -56,7 +58,7 @@ export default class LayoutSider extends Component {
 
   // 渲染组件
   render () {
-    let { location, noteBookList } = this.props
+    let { location, noteBookList, noteBookParams } = this.props
 
     let menu = (
       <Menu onClick={this.onMenuClick.bind(this)}>
@@ -64,16 +66,23 @@ export default class LayoutSider extends Component {
         <Menu.Item key="2">删除</Menu.Item>
       </Menu>
     )
+    let pathname = location.pathname.match(/(^[//][\w\d]+)/i) || ['/']
     return (
       <div className="layout-sider-main">
         <Menu
           theme={'dark'}
           mode={'inline'}
-          selectedKeys={[location.pathname]}
-          defaultOpenKeys={['/notebook']}
+          selectedKeys={[pathname[0]]}
           inlineIndent={10} >
+          {__DESKTOP__ ? null : (
+            <Menu.Item key={'/'}>
+              <Link to={`/`}>
+                <FontAwesome type={'home'} /><span>主页</span>
+              </Link>
+            </Menu.Item>
+          )}
           <Menu.Item key={'/notes'}>
-            <Link to={`/notes`}>
+            <Link to={`/notes${noteBookParams ? `/${noteBookParams}` : ''}`}>
               <FontAwesome type={'file-text'} /><span>笔记</span>
             </Link>
           </Menu.Item>

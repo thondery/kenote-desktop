@@ -14,6 +14,7 @@ export default class CoreLayout extends Component {
     openModal: PropTypes.func,
     location: PropTypes.object,
     noteBookList: PropTypes.array,
+    noteBookParams: PropTypes.string,
   }
 
   // 设置参数默认值
@@ -21,6 +22,7 @@ export default class CoreLayout extends Component {
     openModal: () => null,
     location: null,
     noteBookList: [],
+    noteBookParams: undefined,
   }
 
   // 组件初始化
@@ -72,6 +74,7 @@ export default class CoreLayout extends Component {
             <LayoutSider
               noteBookList={this.props.noteBookList}
               location={this.props.location}
+              noteBookParams={this.props.noteBookParams}
               openModal={this.props.openModal.bind(this)} />
           </Sider>
           {this.props.children}

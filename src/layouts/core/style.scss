@@ -1,9 +1,15 @@
-
+.core-layout {
+  background: #eaf5ed;
+}
 .ant-layout {
   height: inherit;
-  background: #eee;
+  background: transparent;
   //background-color: #eaf5ed;
   overflow-x: hidden;
+}
+
+.ant-layout-sider {
+  background: transparent;
 }
 
 .layout-sider {

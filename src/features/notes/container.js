@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Notes from './component'
-import actions from './action.js'
+import Notes from './notes'
+import * as actions from './action.js'
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -10,6 +10,9 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => ({
+  noteBookList        : state.Notebook.noteBook,
+  notebook            : state.Notes.notebook,
+  currentNote         : state.Notes.currentNote,
   
 })
 

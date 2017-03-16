@@ -51,12 +51,14 @@ class App extends Component {
       modelOpened,
       modelOption,
       noteBookList,
+      noteBookParams,
       children 
     } = this.props
     let mainView = mainWindowAuth 
       ? <CoreLayout
           noteBookList={noteBookList}
           location={this.props.location}
+          noteBookParams={noteBookParams}
           openModal={this.props.actions.openModal.bind(this)} >
           {children}
         </CoreLayout>
@@ -108,6 +110,8 @@ const mapStateToProps = (state) => ({
   noteBookList        : state.Notebook.noteBook,
   noteBookIniial      : state.Notebook.listInitial,
   NoteBookList        : state.Root.noteBookList,
+
+  noteBookParams      : state.Notes.notebook,
 
 })
 

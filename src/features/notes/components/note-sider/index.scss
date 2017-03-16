@@ -1,0 +1,18 @@
+
+.notes-sider-main {
+  width: inherit;
+  height: 100%;
+  border-right: 1px #ccc solid;
+  background: #f7f7f7;
+
+  .notes-sider-header {
+    padding: 0;
+    border-bottom: 1px #ccc solid;
+    background: #f7f7f7;
+    height: 50px;
+    line-height: 1.5;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+}

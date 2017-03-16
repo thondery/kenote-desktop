@@ -105,6 +105,7 @@ export default class Notebook extends Component {
                       selected={selectIndex === (item.clientId || item._id)}
                       onCogNotebook={this.cogNotebookHandle.bind(this, item)}
                       onTrashNotebook={this.trashNotebookHandle.bind(this, item)}
+                      onDoubleClick={this.onDoubleClickHandle.bind(this, item)}
                       />
                   </Col>
                 )
@@ -125,6 +126,7 @@ export default class Notebook extends Component {
                           selected={selectIndex === (item.clientId || item._id)}
                           onCogNotebook={this.cogNotebookHandle.bind(this, item)}
                           onTrashNotebook={this.trashNotebookHandle.bind(this, item)}
+                          onDoubleClick={this.onDoubleClickHandle.bind(this, item)}
                           />
                       )
                     })}
@@ -159,6 +161,13 @@ export default class Notebook extends Component {
       },
       onCancel() {},
     })
+  }
+
+  onDoubleClickHandle (item) {
+    console.log(item.clientId || item._id)
+    let { router } = this.props
+    this.props.actions.changeParams(item.clientId || item._id)
+    router.push(`/notes/${item.clientId || item._id}`)
   }
 
   getFilterList (list, tag, filter) {

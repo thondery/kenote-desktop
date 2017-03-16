@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import Notebook from './notebook'
 import * as actions from './action.js'
 import { openModal } from '../../containers/reducer'
+import { changeParams } from '../notes/action'
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators({ ...actions, openModal }, dispatch)
+    actions: bindActionCreators({ ...actions, openModal, changeParams }, dispatch)
   }
 }
 

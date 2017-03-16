@@ -5,6 +5,13 @@ export default {
   name: 'Notes',
   component: Notes,
   childRoutes: [
-    { path: 'default-page', name: 'Default page', component: Notes, isIndex: true }
+    { path: 'all', name: 'Default page', component: Notes, isIndex: true },
+    { path: ':notebook', name: '', component: Notes },
   ]
 }
+
+
+/*
+ - /notes              -> 全部
+ - /notes/:notebook    -> 笔记本
+*/
